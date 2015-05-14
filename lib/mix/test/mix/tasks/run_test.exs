@@ -96,6 +96,14 @@ defmodule Mix.Tasks.RunTest do
       ]
       assert_received :evaled
       assert_received {:argv, [^file, "-x", "bar"]}
+
+      unload_file.()
+      Mix.Tasks.Run.run [file, "hello-world", "a_b.c"]
+      assert_received {:argv, ["hello-world", "a_b.c"]}
+
+      unload_file.()
+      Mix.Tasks.Run.run [file, "hello world", "a b c"]
+      assert_received {:argv, ["hello world", "a b c"]}
     end
   end
 end

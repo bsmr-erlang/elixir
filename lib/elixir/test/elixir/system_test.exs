@@ -44,6 +44,12 @@ defmodule SystemTest do
     assert args == ["-o", "opt", "arg1", "arg2", "--long-opt", "10"]
   end
 
+  test "argv/0 - quoted" do
+    list = elixir('-e "IO.inspect System.argv" -- foo "a b c" "d e"')
+    {args, _} = Code.eval_string list, []
+    assert args == ["foo", "a b c", "d e"]
+  end
+
   @test_var "SYSTEM_ELIXIR_ENV_TEST_VAR"
 
   test "*_env/*" do
