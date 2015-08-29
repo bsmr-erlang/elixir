@@ -21,6 +21,7 @@ defmodule IEx.Helpers do
     * `ls/0`      — lists the contents of the current directory
     * `ls/1`      — lists the contents of the specified directory
     * `pwd/0`     — prints the current working directory
+    * `q/0`       — terminate the Elixir shell gracefully
     * `r/1`       — recompiles and reloads the given module's source file
     * `respawn/0` — respawns the current shell
     * `s/1`       — prints spec information
@@ -172,6 +173,13 @@ defmodule IEx.Helpers do
       IEx.Introspection.h(unquote_splicing(args))
     end
   end
+
+	@doc """
+	Terminate the Elixir shell gracefully.
+	"""
+	def q do
+		:init.stop
+	end
 
   @doc """
   When given a module, prints specifications (or simply specs) for all the
