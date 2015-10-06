@@ -24,6 +24,7 @@ defmodule IEx.Helpers do
     * `ls/1`          - lists the contents of the specified directory
     * `pid/3`         - creates a PID with the 3 integer arguments passed
     * `pwd/0`         - prints the current working directory
+    * `q/0`           - terminate the Elixir shell gracefully
     * `r/1`           - recompiles and reloads the given module
     * `recompile/0`   - recompiles the current Mix project (requires iex -S mix)
     * `respawn/0`     - respawns a new IEx shell
@@ -606,5 +607,12 @@ defmodule IEx.Helpers do
                         is_integer(y) and y >= 0 and
                         is_integer(z) and z >= 0 do
     :c.pid(x, y, z)
+  end
+
+  @doc """
+  Terminate the Elixir shell gracefully.
+  """
+  def q do
+    :init.stop
   end
 end
